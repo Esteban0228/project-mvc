@@ -1,5 +1,5 @@
-@startuml 05-clases-controladores-modelos
-!include _style.puml
+@startuml 05-class-controller-model
+!include style.puml
 title Diagrama de clases - controladores y modelos de la aplicación
 left to right direction
 
@@ -16,7 +16,7 @@ package "controller" {
   class ReservationController <<controller>> {
     +getAll() +getById(id) +create(data) +update(id, data) +remove(id)
   }
-  class EstateController <<controller>> {
+  class StateController <<controller>> {
     +getAll() +getById(id) +create(data) +update(id, data) +remove(id)
   }
   class CityController <<controller>> {
@@ -37,7 +37,7 @@ package "model" {
   class ReservationModel <<model>> {
     +findAll() +findById(id) +insert(r) +update(id, r) +delete(id)
   }
-  class EstateModel <<model>> {
+  class StateModel <<model>> {
     +findAll() +findById(id) +insert(e) +update(id, e) +delete(id)
   }
   class CityModel <<model>> {
@@ -47,13 +47,13 @@ package "model" {
 
 PersonController --> PersonModel
 UserController --> UserModel
-UserController ..> PersonModel : valida PersonId
+UserController ..> PersonModel : valida personId
 ReservationTypeController --> ReservationTypeModel
 ReservationController --> ReservationModel
-ReservationController ..> UserModel : valida UserId
-ReservationController ..> ReservationTypeModel : valida ReservationTypeId
-ReservationController ..> CityModel : valida CityId
-EstateController --> EstateModel
+ReservationController ..> UserModel : valida userId
+ReservationController ..> ReservationTypeModel : valida reservationTypeId
+ReservationController ..> CityModel : valida cityId
+StateController --> StateModel
 CityController --> CityModel
-CityController ..> EstateModel : valida EstateId
+CityController ..> StateModel : valida stateId
 @enduml

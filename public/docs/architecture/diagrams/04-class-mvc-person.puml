@@ -1,5 +1,5 @@
-@startuml 04-clases-mvc-person
-!include _style.puml
+@startuml 04-class-mvc-person
+!include style.puml
 title Diagrama de clases - capas MVC (ejemplo: Person)
 
 package "view/client/person" {

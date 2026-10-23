@@ -1,5 +1,5 @@
-@startuml 07-casos-de-uso-administrador
-!include _style.puml
+@startuml 07-use-case-administrator
+!include style.puml
 title Casos de uso - Administrador
 left to right direction
 
@@ -20,10 +20,10 @@ rectangle "project-mvc" {
     usecase "Validar usuario, tipo\nde reserva y ciudad" as UC_ValRes
   }
 
-  package "ubication" {
-    usecase "Gestionar departamentos\n(Estate)" as UC_Estate
+  package "location" {
+    usecase "Gestionar departamentos\n(State)" as UC_State
     usecase "Gestionar ciudades\n(City)" as UC_City
-    usecase "Validar departamento" as UC_ValEstate
+    usecase "Validar departamento" as UC_ValState
   }
 }
 
@@ -32,12 +32,12 @@ Admin --> UC_Person
 Admin --> UC_User
 Admin --> UC_Type
 Admin --> UC_Reservation
-Admin --> UC_Estate
+Admin --> UC_State
 Admin --> UC_City
 
 UC_User ..> UC_ValPerson : <<include>>
 UC_Reservation ..> UC_ValRes : <<include>>
-UC_City ..> UC_ValEstate : <<include>>
+UC_City ..> UC_ValState : <<include>>
 
 legend bottom
   "Gestionar" = crear, listar, consultar, editar y eliminar

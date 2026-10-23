@@ -1,13 +1,13 @@
-@startuml 08-secuencia-registrar-persona
-!include _style.puml
+@startuml 08-sequence-create-person
+!include style.puml
 title Secuencia - Registrar persona
 autonumber
 
 actor "Usuario" as U
-participant "PersonForm.jsx\n<<view>>" as V
+participant "person-form.jsx\n<<view>>" as V
 participant "api/person/route.js\n<<route>>" as R
-participant "personController\n<<controller>>" as C
-participant "personModel\n<<model>>" as M
+participant "person-controller.js\n<<controller>>" as C
+participant "person-model.js\n<<model>>" as M
 database "MySQL" as DB
 
 U -> V : llena el formulario y envía

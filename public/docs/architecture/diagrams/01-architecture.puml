@@ -1,5 +1,5 @@
-@startuml 01-arquitectura
-!include _style.puml
+@startuml 01-architecture
+!include style.puml
 title Arquitectura de alto nivel - project-mvc
 left to right direction
 

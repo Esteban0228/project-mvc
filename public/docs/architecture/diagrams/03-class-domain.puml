@@ -1,5 +1,5 @@
-@startuml 03-clases-dominio
-!include _style.puml
+@startuml 03-class-domain
+!include style.puml
 title Diagrama de clases - dominio (model)
 
 package "client" {
@@ -12,7 +12,7 @@ package "client" {
 
   class User <<entity>> {
     +id : int
-    +user : string
+    +username : string
     -password : string
     +personId : int
   }
@@ -34,26 +34,26 @@ package "reservation" {
   }
 }
 
-package "ubication" {
-  class Estate <<entity>> {
+package "location" {
+  class State <<entity>> {
     +id : int
-    +codePostal : string
+    +postalCode : string
     +name : string
     +description : string
   }
 
   class City <<entity>> {
     +id : int
-    +codePostal : string
+    +postalCode : string
     +name : string
     +description : string
-    +estateId : int
+    +stateId : int
   }
 }
 
 Person "1" --> "0..*" User : tiene
 User "1" --> "0..*" Reservation : realiza
 ReservationType "1" --> "0..*" Reservation : clasifica
-Estate "1" --> "0..*" City : contiene
+State "1" --> "0..*" City : contiene
 City "1" --> "0..*" Reservation : ubica
 @enduml

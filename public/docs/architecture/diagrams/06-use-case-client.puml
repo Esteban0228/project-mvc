@@ -1,5 +1,5 @@
-@startuml 06-casos-de-uso-cliente
-!include _style.puml
+@startuml 06-use-case-client
+!include style.puml
 title Casos de uso - Cliente
 left to right direction
 

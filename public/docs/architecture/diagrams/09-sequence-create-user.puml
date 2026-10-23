@@ -1,18 +1,18 @@
-@startuml 09-secuencia-crear-usuario
-!include _style.puml
+@startuml 09-sequence-create-user
+!include style.puml
 title Secuencia - Crear usuario
 autonumber
 
 actor "Administrador" as U
-participant "UserForm.jsx\n<<view>>" as V
+participant "user-form.jsx\n<<view>>" as V
 participant "api/user/route.js\n<<route>>" as R
-participant "userController\n<<controller>>" as C
-participant "personModel\n<<model>>" as PM
-participant "userModel\n<<model>>" as M
+participant "user-controller.js\n<<controller>>" as C
+participant "person-model.js\n<<model>>" as PM
+participant "user-model.js\n<<model>>" as M
 database "MySQL" as DB
 
-U -> V : elige la persona, escribe usuario y contraseña
-V -> R : POST /api/user {user, password, personId}
+U -> V : elige la persona, escribe username y contraseña
+V -> R : POST /api/user {username, password, personId}
 R -> C : create(body)
 C -> C : validate(data)
 C -> PM : findById(personId)

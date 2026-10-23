@@ -4,7 +4,7 @@ Aplicación web con **Next.js (App Router) + React**, organizada con el patrón 
 
 ## Vista general
 
-![Arquitectura de alto nivel](diagrams/01-arquitectura.svg)
+![Arquitectura de alto nivel](diagrams/01-architecture.svg)
 
 ## Capas
 
@@ -18,7 +18,7 @@ Aplicación web con **Next.js (App Router) + React**, organizada con el patrón 
 
 ## Flujo de una petición
 
-Los diagramas de secuencia de cada flujo están en [05-diagramas-secuencia.md](05-diagramas-secuencia.md).
+Los diagramas de secuencia de cada flujo están en [05-sequence-diagram.md](05-sequence-diagram.md).
 
 ## Rutas
 
@@ -28,8 +28,8 @@ Los diagramas de secuencia de cada flujo están en [05-diagramas-secuencia.md](0
 | client | `/client/user`, `/client/user/[id]` | `/api/user`, `/api/user/[id]` |
 | reservation | `/reservation`, `/reservation/[id]` | `/api/reservation`, `/api/reservation/[id]` |
 | reservation | `/reservation/reservation-type`, `/reservation/reservation-type/[id]` | `/api/reservation-type`, `/api/reservation-type/[id]` |
-| ubication | `/ubication/estate`, `/ubication/estate/[id]` | `/api/estate`, `/api/estate/[id]` |
-| ubication | `/ubication/city`, `/ubication/city/[id]` | `/api/city`, `/api/city/[id]` |
+| location | `/location/state`, `/location/state/[id]` | `/api/state`, `/api/state/[id]` |
+| location | `/location/city`, `/location/city/[id]` | `/api/city`, `/api/city/[id]` |
 
 Cada API expone: `GET` (listar) y `POST` (crear) en la ruta base; `GET`, `PUT` y `DELETE` en `[id]`.
 
@@ -38,7 +38,7 @@ Cada API expone: `GET` (listar) y `POST` (crear) en la ruta base; `GET`, `PUT` y
 | Servicio | Imagen | Puerto | Descripción |
 |---|---|---|---|
 | `app` | Se construye desde el `Dockerfile` del proyecto | 3000 | Servidor Next.js (vistas, API, controladores y modelos) |
-| `db` | `mysql:8.4` (oficial) | 3306 | Base de datos `project_mvc`. Al crearse por primera vez ejecuta `db/init/*.sql` |
+| `db` | `mysql:8.4` (oficial) | 3306 | Base de datos `project_mvc`. Al crearse por primera vez ejecuta los scripts de `public/docs/model-data/` |
 
 - **Un solo comando:** `docker compose up -d --build` levanta los dos servicios.
 - **Red interna:** la app se conecta a MySQL con el host `db` (el nombre del servicio), no con `localhost`.
@@ -53,12 +53,10 @@ project-mvc/
 ├── Dockerfile            ← imagen de la app Next.js
 ├── docker-compose.yml    ← servicios app + db, red y volumen
 ├── .dockerignore
-├── .env.example          ← plantilla de variables (DB_HOST, DB_USER…)
-└── db/
-    └── init/
-        ├── 01-schema.sql ← CREATE TABLE de las 6 tablas
-        └── 02-seed.sql   ← datos iniciales (opcional)
+└── .env.example          ← plantilla de variables (DB_HOST, DB_USER…)
 ```
+
+El script de la base de datos está en [`../model-data/01-schema.sql`](../model-data/01-schema.sql). El servicio `db` lo monta como `./public/docs/model-data:/docker-entrypoint-initdb.d:ro`.
 
 ## Decisiones pendientes
 

@@ -1,16 +1,16 @@
-@startuml 10-secuencia-crear-reserva
-!include _style.puml
+@startuml 10-sequence-create-reservation
+!include style.puml
 title Secuencia - Crear reserva
 autonumber
 
 actor "Cliente" as U
-participant "ReservationForm.jsx\n<<view>>" as V
+participant "reservation-form.jsx\n<<view>>" as V
 participant "api/reservation/route.js\n<<route>>" as R
-participant "reservationController\n<<controller>>" as C
-participant "userModel\n<<model>>" as UM
-participant "reservationTypeModel\n<<model>>" as TM
-participant "cityModel\n<<model>>" as CM
-participant "reservationModel\n<<model>>" as M
+participant "reservation-controller.js\n<<controller>>" as C
+participant "user-model.js\n<<model>>" as UM
+participant "reservation-type-model.js\n<<model>>" as TM
+participant "city-model.js\n<<model>>" as CM
+participant "reservation-model.js\n<<model>>" as M
 database "MySQL" as DB
 
 U -> V : elige el tipo, la ciudad y escribe el nombre

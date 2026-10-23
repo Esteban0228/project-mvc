@@ -6,25 +6,25 @@ Todos los flujos recorren las mismas capas: **view → route (API) → controlle
 
 Valida los datos y que el email no esté repetido.
 
-![Secuencia: registrar persona](diagrams/08-secuencia-registrar-persona.svg)
+![Secuencia: registrar persona](diagrams/08-sequence-create-person.svg)
 
 ## Crear usuario
 
 Valida que la Person exista y guarda la contraseña con hash.
 
-![Secuencia: crear usuario](diagrams/09-secuencia-crear-usuario.svg)
+![Secuencia: crear usuario](diagrams/09-sequence-create-user.svg)
 
 ## Crear reserva
 
 Valida que existan el User, el ReservationType y la City.
 
-![Secuencia: crear reserva](diagrams/10-secuencia-crear-reserva.svg)
+![Secuencia: crear reserva](diagrams/10-sequence-create-reservation.svg)
 
 ## Crear ciudad
 
-Valida que exista el Estate.
+Valida que exista el State.
 
-![Secuencia: crear ciudad](diagrams/11-secuencia-crear-ciudad.svg)
+![Secuencia: crear ciudad](diagrams/11-sequence-create-city.svg)
 
 ## Códigos de respuesta usados
 
