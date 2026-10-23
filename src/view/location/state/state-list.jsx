@@ -7,6 +7,7 @@ export default function StateList() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
+  const [editingId, setEditingId] = useState(null);
 
   async function loadStates() {
     const response = await fetch("/api/state");
@@ -22,10 +23,35 @@ export default function StateList() {
     loadStates();
   }, []);
 
+  function clearForm() {
+    setPostalCode("");
+    setName("");
+    setDescription("");
+    setEditingId(null);
+    setError("");
+  }
+
+  // Puts the data of the state in the form to edit it
+  function handleEdit(state) {
+    setEditingId(state.id);
+    setPostalCode(state.postalCode);
+    setName(state.name);
+    setDescription(state.description || "");
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
-    const response = await fetch("/api/state", {
-      method: "POST",
+
+    // If there is an id we are editing (PUT), if not we are creating (POST)
+    let url = "/api/state";
+    let method = "POST";
+    if (editingId) {
+      url = "/api/state/" + editingId;
+      method = "PUT";
+    }
+
+    const response = await fetch(url, {
+      method: method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ postalCode, name, description }),
     });
@@ -34,10 +60,7 @@ export default function StateList() {
       setError(data.error);
       return;
     }
-    setError("");
-    setPostalCode("");
-    setName("");
-    setDescription("");
+    clearForm();
     loadStates();
   }
 
@@ -72,7 +95,12 @@ export default function StateList() {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
         />
-        <button type="submit">Add</button>
+        <button type="submit">{editingId ? "Save" : "Add"}</button>
+        {editingId && (
+          <button type="button" onClick={clearForm}>
+            Cancel
+          </button>
+        )}
       </form>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -81,6 +109,7 @@ export default function StateList() {
         {stateList.map((state) => (
           <li key={state.id}>
             {state.postalCode} - {state.name} ({state.description}){" "}
+            <button onClick={() => handleEdit(state)}>Edit</button>
             <button onClick={() => handleDelete(state.id)}>Delete</button>
           </li>
         ))}
